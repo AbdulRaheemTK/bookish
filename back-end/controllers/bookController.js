@@ -83,7 +83,6 @@ const editBook = asyncHandler(async (req, res) => {
     { new: true }
   );
   if (book) {
-    console.log({ book });
     res.status(200).json(book);
   } else {
     res.status(401);

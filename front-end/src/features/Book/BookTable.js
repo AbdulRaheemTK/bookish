@@ -4,6 +4,7 @@ import "./BookTable.css";
 import EditBookModal from "./EditBookModal";
 import { useDispatch } from "react-redux";
 import { deleteBook } from "./BookSlice";
+import { FaEye, FaEdit, FaTrashAlt } from "react-icons/fa";
 
 const BookTable = ({ books }) => {
   const [selectedBook, setSelectedBook] = useState(null);
@@ -51,19 +52,19 @@ const BookTable = ({ books }) => {
                       className="view-pdf-btn"
                       onClick={() => handleViewPdf(book)}
                     >
-                      View
+                      <FaEye />
                     </button>
                     <button
                       className="edit-btn"
                       onClick={() => handleEditPdf(book)}
                     >
-                      Edit
+                      <FaEdit />
                     </button>
                     <button
                       className="delete-btn"
                       onClick={() => handleDeletePdf(book)}
                     >
-                      Delete
+                      <FaTrashAlt />
                     </button>
                   </div>
                 </td>

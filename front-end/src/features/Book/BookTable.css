@@ -1,7 +1,7 @@
 .table-container {
   max-height: 400px;
   overflow: auto;
-  max-width: 90%;
+  max-width: 80%;
   margin: 0.5rem auto;
 }
 
@@ -35,13 +35,12 @@
 /* Style for the View PDF button */
 .btn-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 .view-pdf-btn {
   background-color: #f2f2f2;
   color: #388e3c;
   border: 1px solid #388e3c;
-  padding: 0.5rem 1rem;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
@@ -53,7 +52,6 @@
   background-color: #f2f2f2;
   color: #9c27b0;
   border: 1px solid #9c27b0;
-  padding: 0.5rem 1rem;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
@@ -65,7 +63,6 @@
   background-color: #f2f2f2;
   color: red;
   border: 1px solid red;
-  padding: 0.5rem 1rem;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
