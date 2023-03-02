@@ -1,5 +1,6 @@
-import { Form, Formik } from "formik";
+import { Form, Formik, replace } from "formik";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { addBook } from "./BookSlice";
 import * as yup from "yup";
@@ -14,6 +15,7 @@ function AddBookForm() {
 
   const { user } = useSelector((state) => state.login);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   console.log("User in FORM:", user);
 
@@ -42,12 +44,17 @@ function AddBookForm() {
     formData.append("description", values.description);
     formData.append("publishedDate", values.publishedDate);
     formData.append("authorId", values.authorId);
-    const res = await dispatch(addBook(formData));
-
-    if (!res.payload) {
+    const res = await dispatch(addBook(formData)).unwrap();
+    console.log({ res });
+    if (!res.message) {
       setmodalMessage("Book not uploaded!");
     } else {
-      setmodalMessage(res.payload.message);
+      setmodalMessage(res.message);
+      setTimeout(() => {
+        setmodalMessage("");
+        setisOpenModal(false);
+        navigate("/", { replace: true });
+      }, 3000);
     }
     setisOpenModal(true);
   };
