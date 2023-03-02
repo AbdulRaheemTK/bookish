@@ -30,7 +30,6 @@ export const addBook = createAsyncThunk("book/addBook", async (formData) => {
 export const editBook = createAsyncThunk(
   "book/editBook",
   async ({ _id, title, description, publishedDate }) => {
-    console.log(_id, title, description, publishedDate);
     try {
       const response = await axios.patch(
         `${baseUrl}/api/book/editBook/${_id}`,
@@ -39,6 +38,20 @@ export const editBook = createAsyncThunk(
           description,
           publishedDate,
         }
+      );
+      return response.data;
+    } catch (error) {
+      throw error.response.data.errorMessage;
+    }
+  }
+);
+
+export const deleteBook = createAsyncThunk(
+  "book/deleteBook",
+  async ({ _id }) => {
+    try {
+      const response = await axios.delete(
+        `${baseUrl}/api/book/deleteBook/${_id}`
       );
       return response.data;
     } catch (error) {
@@ -63,6 +76,11 @@ const BookSlice = createSlice({
 
     builder.addCase(editBook.fulfilled, (state, action) => {
       console.log("editBook fullfilled", action.payload);
+      state.book = action.payload;
+    });
+
+    builder.addCase(deleteBook.fulfilled, (state, action) => {
+      console.log("deleteBook fullfilled", action.payload);
       state.book = action.payload;
     });
   },

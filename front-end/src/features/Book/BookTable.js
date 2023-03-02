@@ -2,11 +2,15 @@ import { useState } from "react";
 import Backdrop from "../Backdrop/Backdrop";
 import "./BookTable.css";
 import EditBookModal from "./EditBookModal";
+import { useDispatch } from "react-redux";
+import { deleteBook } from "./BookSlice";
 
 const BookTable = ({ books }) => {
   const [selectedBook, setSelectedBook] = useState(null);
   const [selectedBookForEdit, setSelectedBookForEdit] = useState(null);
   const [isOpenModal, setisOpenModal] = useState(false);
+
+  const dispatch = useDispatch();
 
   const handleViewPdf = (book) => {
     setSelectedBook(book);
@@ -19,6 +23,7 @@ const BookTable = ({ books }) => {
 
   const handleDeletePdf = (book) => {
     console.log({ book });
+    dispatch(deleteBook(book));
   };
 
   return (
