@@ -64,9 +64,9 @@ const readBook = (req, res) => {
   readStream.pipe(res);
 };
 
-//@description     Get all Books
+//@description     Edit's a particular Book
 //@route           Patch /api/book/editBook/:bookId
-//@access          author
+//@access          author, admin
 
 const editBook = asyncHandler(async (req, res) => {
   const bookId = req.params.bookId;
@@ -90,4 +90,20 @@ const editBook = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { addBook, readBook, getBooks, editBook };
+//@description     Delete a Books
+//@route           Delete /api/book/deleteBook/:bookId
+//@access          author, admin
+
+const deleteBook = asyncHandler(async (req, res) => {
+  const bookId = req.params.bookId;
+  const response = await Book.findByIdAndDelete(bookId);
+
+  if (response) {
+    res.status(200).json(response);
+  } else {
+    res.status(401);
+    next(new Error("Book not deleted!"));
+  }
+});
+
+module.exports = { addBook, readBook, getBooks, editBook, deleteBook };

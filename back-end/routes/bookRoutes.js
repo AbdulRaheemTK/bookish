@@ -9,6 +9,7 @@ const {
   getBooks,
   readBook,
   editBook,
+  deleteBook,
 } = require("../controllers/bookController");
 
 //@description     Add a new book
@@ -30,5 +31,10 @@ router.get("/readBook/:filename", readBook);
 //@route           Patch /api/book/editBook/:bookId
 //@access          author, admin
 router.patch("/editBook/:bookId", editBook);
+
+//@description     Delete a Books
+//@route           Delete /api/book/deleteBook/:bookId
+//@access          author, admin
+router.delete("/deleteBook/:bookId", deleteBook);
 
 module.exports = router;
