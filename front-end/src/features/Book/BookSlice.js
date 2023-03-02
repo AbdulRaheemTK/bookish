@@ -27,6 +27,26 @@ export const addBook = createAsyncThunk("book/addBook", async (formData) => {
   }
 });
 
+export const editBook = createAsyncThunk(
+  "book/editBook",
+  async ({ _id, title, description, publishedDate }) => {
+    console.log(_id, title, description, publishedDate);
+    try {
+      const response = await axios.patch(
+        `${baseUrl}/api/book/editBook/${_id}`,
+        {
+          title,
+          description,
+          publishedDate,
+        }
+      );
+      return response.data;
+    } catch (error) {
+      throw error.response.data.errorMessage;
+    }
+  }
+);
+
 const BookSlice = createSlice({
   name: "book",
   initialState: initialState,
@@ -38,6 +58,11 @@ const BookSlice = createSlice({
 
     builder.addCase(addBook.fulfilled, (state, action) => {
       console.log("addBook fullfilled!", action.payload);
+      state.book = action.payload;
+    });
+
+    builder.addCase(editBook.fulfilled, (state, action) => {
+      console.log("editBook fullfilled", action.payload);
       state.book = action.payload;
     });
   },

@@ -1,9 +1,10 @@
 import React from "react";
 import * as yup from "yup";
 import { Form, Formik } from "formik";
-import { useSelector } from "react-redux";
 import FormikControl from "../../components/shared/Formik/FormikControl";
 import jwtDecode from "jwt-decode";
+import { useSelector, useDispatch } from "react-redux";
+import { editBook } from "./BookSlice";
 import "./EditBookModal.css";
 
 const EditBookModal = ({
@@ -16,6 +17,7 @@ const EditBookModal = ({
   };
 
   const { user } = useSelector((state) => state.login);
+  const dispatch = useDispatch();
 
   const initialValues = {
     _id: selectedBookForEdit._id,
@@ -36,7 +38,15 @@ const EditBookModal = ({
   });
 
   const onSubmit = async (values) => {
-    console.log("Values:", values);
+    try {
+      const response = await dispatch(editBook(values)).unwrap();
+      if (response) {
+        setisOpenModal(false);
+      }
+    } catch (error) {
+      // handle error here
+      console.log("Error while Submitting", error);
+    }
   };
 
   return (
