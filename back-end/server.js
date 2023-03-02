@@ -9,6 +9,7 @@ const connectDB = require("./config/db");
 const { upload } = require("./middlewares/multerMiddleware");
 require("dotenv").config();
 
+global.__basedir = __dirname;
 const userRoutes = require("./routes/userRoutes");
 const bookRoutes = require("./routes/bookRoutes");
 

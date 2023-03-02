@@ -2,6 +2,7 @@ const fs = require("fs");
 const asyncHandler = require("express-async-handler");
 
 const Book = require("../models/bookModel");
+const path = require("path");
 
 //@description     Add a new book
 //@route           POST /api/book/add
@@ -97,12 +98,26 @@ const editBook = asyncHandler(async (req, res) => {
 const deleteBook = asyncHandler(async (req, res) => {
   const bookId = req.params.bookId;
   const response = await Book.findByIdAndDelete(bookId);
+  const filePath = path.join(
+    __basedir,
+    `uploads/books/${response.book.filename}`
+  );
 
   if (response) {
-    res.status(200).json(response);
+    fs.unlink(filePath, (err) => {
+      if (err) {
+        res.status(500).send({
+          message: "Could not delete the file. " + err,
+        });
+      }
+
+      res.status(200).send({
+        message: "File is deleted from directory.",
+      });
+    });
   } else {
     res.status(401);
-    next(new Error("Book not deleted!"));
+    next(new Error("Book not deleted from mongoose!"));
   }
 });
 
