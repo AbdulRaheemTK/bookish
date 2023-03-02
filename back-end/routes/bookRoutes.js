@@ -8,6 +8,7 @@ const {
   addBook,
   getBooks,
   readBook,
+  editBook,
 } = require("../controllers/bookController");
 
 //@description     Add a new book
@@ -24,5 +25,10 @@ router.get("/getBooks", protect, getBooks);
 //@route           GET /api/book/:filename
 //@access          author, admin
 router.get("/readBook/:filename", readBook);
+
+//@description     Get all Books
+//@route           Patch /api/book/editBook/:bookId
+//@access          author, admin
+router.patch("/editBook/:bookId", editBook);
 
 module.exports = router;

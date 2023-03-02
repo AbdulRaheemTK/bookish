@@ -64,4 +64,30 @@ const readBook = (req, res) => {
   readStream.pipe(res);
 };
 
-module.exports = { addBook, readBook, getBooks };
+//@description     Get all Books
+//@route           Patch /api/book/editBook/:bookId
+//@access          author
+
+const editBook = asyncHandler(async (req, res) => {
+  const bookId = req.params.bookId;
+  const { title, description, publishedDate } = req.body;
+
+  const book = await Book.findByIdAndUpdate(
+    bookId,
+    {
+      title,
+      description,
+      publishedDate,
+    },
+    { new: true }
+  );
+  if (book) {
+    console.log({ book });
+    res.status(200).json(book);
+  } else {
+    res.status(401);
+    next(new Error("Book not updated!"));
+  }
+});
+
+module.exports = { addBook, readBook, getBooks, editBook };
