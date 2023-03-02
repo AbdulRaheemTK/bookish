@@ -17,6 +17,10 @@ const BookTable = ({ books }) => {
     setisOpenModal(true);
   };
 
+  const handleDeletePdf = (book) => {
+    console.log({ book });
+  };
+
   return (
     <>
       {isOpenModal ? <Backdrop setisOpenModal={setisOpenModal} /> : null}
@@ -49,6 +53,12 @@ const BookTable = ({ books }) => {
                       onClick={() => handleEditPdf(book)}
                     >
                       Edit
+                    </button>
+                    <button
+                      className="delete-btn"
+                      onClick={() => handleDeletePdf(book)}
+                    >
+                      Delete
                     </button>
                   </div>
                 </td>

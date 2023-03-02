@@ -1,13 +1,12 @@
 .table-container {
   max-height: 400px;
   overflow: auto;
-  max-width: 60%;
+  max-width: 90%;
   margin: 0.5rem auto;
 }
 
 .book-table {
   width: 100%;
-  max-width: 800px;
   margin: 0 auto;
   border-collapse: collapse;
   table-layout: fixed;
@@ -62,6 +61,18 @@
   margin: 0;
 }
 
+.delete-btn {
+  background-color: #f2f2f2;
+  color: red;
+  border: 1px solid red;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  font-size: 1.2rem;
+  margin: 0;
+}
+
 /* Style for hover state */
 .view-pdf-btn:hover {
   background-color: #388e3c;
@@ -71,18 +82,25 @@
   background-color: #9c27b0;
   color: #fff;
 }
-
+.delete-btn:hover {
+  background-color: red;
+  color: #fff;
+}
 /* Style for active state */
 .view-pdf-btn:active {
   background-color: #1b5e20;
   color: #fff;
   border-color: #1b5e20;
 }
-
 .edit-btn:active {
   background-color: #9c27b0;
   color: #fff;
   border-color: #9c27b0;
+}
+.delete-btn:active {
+  background-color: red;
+  color: #fff;
+  border-color: red;
 }
 
 .pdf-viewer {
