@@ -4,8 +4,8 @@ A simple application created for read and write pdf using multer, authorization 
 
 # BackEnd
 
-CD to back-end the run npm start to start the backend server
+CD to back-end then run npm start to start the backend server
 
 # FrontEnd
 
-CD to front-end the run npm start to start the frontend
+CD to front-end then run npm start to start the frontend
